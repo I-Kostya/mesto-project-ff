@@ -38,5 +38,5 @@ function showCards () {
   });
 }
 
-showCards()
+showCards();
 
