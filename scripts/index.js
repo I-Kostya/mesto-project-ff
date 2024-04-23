@@ -15,6 +15,7 @@ function addCard (cardName, cardLink, deleteCard) {
   
   cardElement.querySelector('.card__title').textContent = cardName;
   cardElement.querySelector('.card__image').src = cardLink;
+  cardElement.querySelector('.card__image').alt = cardName;
   
   deleteButton.addEventListener('click', () => {
     deleteCard(cardElement);
@@ -31,7 +32,7 @@ function showCards () {
   const listContainer = document.querySelector('.places__list'); 
   
   initialCards.forEach(elem => {
-    const card = addCard(elem.name, elem.link, deleteCard)
+    const card = addCard(elem.name, elem.link, deleteCard);
     
     listContainer.append(card);
   });
