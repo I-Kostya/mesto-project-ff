@@ -8,9 +8,7 @@
 
 // @todo: Вывести карточки на страницу
 
-const listContainer = document.querySelector('.places__list'); 
-
-function addCard (cardName, cardLink, deleteCard) {
+function copyCard (cardName, cardLink, deleteCard) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const deleteButton = cardElement.querySelector('.card__delete-button');
@@ -21,7 +19,7 @@ function addCard (cardName, cardLink, deleteCard) {
   deleteButton.addEventListener('click', () => {
     deleteCard(cardElement);
 	});
-
+  
   return cardElement;
 }
 
@@ -29,8 +27,15 @@ function deleteCard(card) {
   card.remove();
 }
 
-initialCards.forEach(elem => {
-  const card = addCard(elem.name, elem.link, deleteCard);
+function addCard () {
+  const listContainer = document.querySelector('.places__list'); 
   
-  listContainer.append(card);
-});
+  initialCards.forEach(elem => {
+    const card = copyCard(elem.name, elem.link, deleteCard)
+    
+    listContainer.append(card);
+  });
+}
+
+addCard();
+
