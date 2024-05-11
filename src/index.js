@@ -1,3 +1,7 @@
+import "./pages/index.css";
+import { initialCards } from "./scripts/cards";
+
+
 const cardTemplate = document.querySelector('#card-template').content;
 const listContainer = document.querySelector('.places__list'); 
 
@@ -30,4 +34,3 @@ function showCards () {
 }
 
 showCards();
-
