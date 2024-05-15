@@ -1,17 +1,46 @@
-export function openModal(evt) {
-  evt.style.display = "flex";
+export function openModal(popup) {
+  popup.classList.add('popup_is-opened');
+  
+  const popupCloseBtn = popup.querySelector('.popup__close');
+  const popupContent = popup.querySelector('.popup__content');
+  
+
+  popup.addEventListener("click", closeModalByOverlay);
+  popupCloseBtn.addEventListener('click', () => {
+    closeModal(popup);
+  });
+  popupContent.addEventListener('click', event => {
+    event.stopPropagation();
+  });
+  document.addEventListener("keydown", closeModalByEsc);
 }
 
-export function closeModal(evt) {
-  if(evt.target.classList.contains('popup__close') || evt.target.classList.contains('popup')) {
-    evt.currentTarget.style.display = "none";
+function closeModalByEsc(evt) {
+  const popup = document.querySelector('.popup_is-opened');
+
+  if(popup && evt.key === "Escape") {
+    closeModal(popup);
   }
 }
 
-export function fillImageData(card) {
-  const popupImage = document.querySelector(".popup__image");
-  const imageCaption = document.querySelector(".popup__caption");
-  popupImage.src = card.link;
-  popupImage.alt = card.name;
-  imageCaption.textContent = card.name;
+function closeModalByOverlay(evt) {
+  const popup = evt.target.closest('.popup');
+    if(popup && popup.classList.contains('popup_is-opened')){
+      closeModal(popup);
+    }
 }
+
+function closeModal(popup) {
+  popup.closest('.popup').classList.remove('popup_is-opened');
+
+  document.removeEventListener("keydown", closeModalByEsc);
+}
+
+export function initPopups(popupList) {
+  popupList.forEach(popup => {
+
+		popup.openButton.addEventListener('click', () => {
+			openModal(popup.window);
+		});
+	});
+};
