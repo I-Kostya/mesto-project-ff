@@ -8,7 +8,7 @@ export function openModal(popup) {
   popup.addEventListener("click", closeModalByOverlay);
   popupCloseBtn.addEventListener('click', () => {
     closeModal(popup);
-  });
+  }, {once: true});
   popupContent.addEventListener('click', event => {
     event.stopPropagation();
   });
