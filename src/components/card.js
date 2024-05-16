@@ -41,17 +41,3 @@ export function deleteCard(card) {
 export function likeCard(evt) {
   evt.target.classList.toggle('card__like-button_is-active');
 }
-
-export function showCards(cards, container, cardTemplate) {
-  cards.forEach(card => {
-    const newCard = createCard(
-      card,
-      cardTemplate,
-      deleteCard,
-      showPicture,
-      likeCard
-    );
-
-    container.append(newCard);
-  });
-}
