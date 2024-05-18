@@ -48,7 +48,7 @@ function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
 
   const cardData = {
-    title: addCardForm['place-name'].value,
+    name: addCardForm['place-name'].value,
     link: addCardForm.link.value,
   }
 
