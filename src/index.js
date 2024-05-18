@@ -32,6 +32,7 @@ function showPicture(card) {
   image.src = card.link;
   image.alt = card.name;
   imageCaption.textContent = card.name;
+
   openModal(imagePopup);
 }
 
@@ -57,6 +58,7 @@ function handleAddCardFormSubmit(evt) {
   listContainer.prepend(newCard);
 
   addCardForm.reset();
+
   closeModal(cardAddPopup);
 }
 
@@ -69,9 +71,6 @@ listCloseButton.forEach((btn) => {
 
   btn.addEventListener("click", () => closeModal(closestPopup));
 });
-
-
-
 
 initialCards.forEach((card) => {
   const newCard = createCard(
