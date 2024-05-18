@@ -1,37 +1,22 @@
-import { openModal } from './modal.js';
-import { imagePopup } from './constant.js';
-
 export function createCard(
-  card,
+  cardData,
   cardTemplate,
-  deleteCard,
-  showPicture,
-  likeCard
+  handlers
 ) {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  const deleteButton = cardElement.querySelector('.card__delete-button');
-  const cardImage = cardElement.querySelector('.card__image');
-  const likeButton = cardElement.querySelector('.card__like-button');
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+  const cardImage = cardElement.querySelector(".card__image");
+  const likeButton = cardElement.querySelector(".card__like-button");
 
-  cardElement.querySelector('.card__title').textContent = card.name;
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
+  cardElement.querySelector(".card__title").textContent = cardData.name;
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
 
-  cardImage.addEventListener('click', () => showPicture(card));
-  deleteButton.addEventListener('click', () => deleteCard(cardElement));
-  likeButton.addEventListener('click', likeCard);
+  cardImage.addEventListener("click", () => handlers.showPicture(cardData));
+  deleteButton.addEventListener("click", () => handlers.deleteCard(cardElement));
+  likeButton.addEventListener("click", handlers.likeCard);
 
   return cardElement;
-}
-
-export function showPicture(card) {
-  const image = imagePopup.querySelector('.popup__image');
-  const imageCaption = imagePopup.querySelector('.popup__caption');
-
-  image.src = card.link;
-  image.alt = card.name;
-  imageCaption.textContent = card.name;
-  openModal(imagePopup);
 }
 
 export function deleteCard(card) {
@@ -39,5 +24,5 @@ export function deleteCard(card) {
 }
 
 export function likeCard(evt) {
-  evt.target.classList.toggle('card__like-button_is-active');
+  evt.target.classList.toggle("card__like-button_is-active");
 }
