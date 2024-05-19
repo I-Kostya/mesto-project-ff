@@ -6,18 +6,18 @@ import { openModal, closeModal } from "./components/modal";
 const cardTemplate = document.querySelector("#card-template").content;
 const listContainer = document.querySelector(".places__list");
 
-const profileEditPopup = document.querySelector(".popup_type_edit");
-const cardAddPopup = document.querySelector(".popup_type_new-card");
-const imagePopup = document.querySelector(".popup_type_image");
+const popupProfileEdit = document.querySelector(".popup_type_edit");
+const popupCardAdd = document.querySelector(".popup_type_new-card");
+const popupImage = document.querySelector(".popup_type_image");
 
-const image = imagePopup.querySelector(".popup__image");
-const imageCaption = imagePopup.querySelector(".popup__caption");
+const image = popupImage.querySelector(".popup__image");
+const imageCaption = popupImage.querySelector(".popup__caption");
 
-const profileEditButton = document.querySelector(".profile__edit-button");
-const profileAddButton = document.querySelector(".profile__add-button");
-const listCloseButton = document.querySelectorAll(".popup__close");
+const buttonProfileEdit = document.querySelector(".profile__edit-button");
+const buttonProfileAdd = document.querySelector(".profile__add-button");
+const buttonsPopupClose = document.querySelectorAll(".popup__close");
 
-const editProfileForm = document.forms["edit-profile"];
+const formPopupProfile = document.forms["edit-profile"];
 const addCardForm = document.forms["new-place"];
 
 const profileTitle = document.querySelector(".profile__title");
@@ -33,16 +33,16 @@ function showPicture(card) {
   image.alt = card.name;
   imageCaption.textContent = card.name;
 
-  openModal(imagePopup);
+  openModal(popupImage);
 }
 
 function handleEditProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  profileTitle.textContent = editProfileForm.name.value;
-  profileDescription.textContent = editProfileForm.description.value;
+  profileTitle.textContent = formPopupProfile.name.value;
+  profileDescription.textContent = formPopupProfile.description.value;
 
-  closeModal(profileEditPopup);
+  closeModal(popupProfileEdit);
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -59,14 +59,14 @@ function handleAddCardFormSubmit(evt) {
 
   addCardForm.reset();
 
-  closeModal(cardAddPopup);
+  closeModal(popupCardAdd);
 }
 
 document.querySelectorAll(".popup").forEach((elem) => {
   elem.classList.add("popup_is-animated");
 });
 
-listCloseButton.forEach((btn) => {
+buttonsPopupClose.forEach((btn) => {
   const closestPopup = btn.closest(".popup");
 
   btn.addEventListener("click", () => closeModal(closestPopup));
@@ -82,14 +82,15 @@ initialCards.forEach((card) => {
   listContainer.append(newCard);
 });
 
-profileEditButton.addEventListener("click", () => {
-  editProfileForm.name.value = profileTitle.textContent;
-  editProfileForm.description.value = profileDescription.textContent;
-  openModal(profileEditPopup);
+buttonProfileEdit.addEventListener("click", () => {
+  formPopupProfile.name.value = profileTitle.textContent;
+  formPopupProfile.description.value = profileDescription.textContent;
+  
+  openModal(popupProfileEdit);
 });
-profileAddButton.addEventListener("click", () => {
-  openModal(cardAddPopup);
+buttonProfileAdd.addEventListener("click", () => {
+  openModal(popupCardAdd);
 });
 
-editProfileForm.addEventListener("submit", handleEditProfileFormSubmit);
+formPopupProfile.addEventListener("submit", handleEditProfileFormSubmit);
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
