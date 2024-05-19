@@ -18,7 +18,7 @@ const buttonProfileAdd = document.querySelector(".profile__add-button");
 const buttonsPopupClose = document.querySelectorAll(".popup__close");
 
 const formPopupProfile = document.forms["edit-profile"];
-const addCardForm = document.forms["new-place"];
+const formPopupCardAdd = document.forms["new-place"];
 
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
@@ -49,15 +49,15 @@ function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
 
   const cardData = {
-    name: addCardForm['place-name'].value,
-    link: addCardForm.link.value,
+    name: formPopupCardAdd['place-name'].value,
+    link: formPopupCardAdd.link.value,
   }
 
   const newCard = createCard(cardData, cardTemplate, cardHandlers);
 
   listContainer.prepend(newCard);
 
-  addCardForm.reset();
+  formPopupCardAdd.reset();
 
   closeModal(popupCardAdd);
 }
@@ -93,4 +93,4 @@ buttonProfileAdd.addEventListener("click", () => {
 });
 
 formPopupProfile.addEventListener("submit", handleEditProfileFormSubmit);
-addCardForm.addEventListener("submit", handleAddCardFormSubmit);
+formPopupCardAdd.addEventListener("submit", handleAddCardFormSubmit);
