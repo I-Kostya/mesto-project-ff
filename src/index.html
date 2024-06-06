@@ -47,17 +47,29 @@
             <input
               type="text"
               name="name"
+              id="name-input"
               class="popup__input popup__input_type_name"
               placeholder="Имя"
               required
+              minlength="2"
+              maxlength="40"
+              pattern="[a-zA-Zа-яА-Я\-\s]+"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             />
+            <span class="name-input-error"></span>
             <input
               type="text"
               name="description"
+              id="description-input"
               class="popup__input popup__input_type_description"
               placeholder="Занятие"
               required
+              minlength="2"
+              maxlength="200" 
+              pattern="[a-zA-Zа-яА-Я\-\s]+"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             />
+            <span class="description-input-error"></span>
             <button type="submit" class="button popup__button">
               Сохранить
             </button>
@@ -72,18 +84,26 @@
             <input
               type="text"
               name="place-name"
+              id="place-name-input"
               class="popup__input popup__input_type_card-name"
               placeholder="Название"
               required
+              minlength="2"
+              maxlength="30"
+              pattern="[a-zA-Zа-яА-Я\-\s]+"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             />
+            <span class="place-name-input-error"></span>
             <input
               type="url"
               name="link"
+              id="link-input"
               class="popup__input popup__input_type_url"
               placeholder="Ссылка на картинку"
               required
             />
-            <button type="submit" class="button popup__button">
+            <span class="link-input-error"></span>
+            <button type="submit" class="button popup__button popup__button_disabled">
               Сохранить
             </button>
           </form>
