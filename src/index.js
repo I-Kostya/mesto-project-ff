@@ -142,12 +142,6 @@ function handleAddCardFormSubmit(evt) {
     });
 }
 
-function handleDeleteCardFormSubmit(evt) {
-  evt.preventDefault();
-
-  cardHandlers.deleteCard(cardElement, cardData);
-}
-
 document.querySelectorAll(".popup").forEach((elem) => {
   elem.classList.add("popup_is-animated");
 });
