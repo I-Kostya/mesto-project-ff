@@ -1,6 +1,6 @@
 import "./pages/index.css";
 import { initialCards } from "./components/cards";
-import { createCard, deleteCard, likeCard } from "./components/card";
+import { confirmDeleteCard, createCard, deleteCard, likeCard } from "./components/card";
 import { openModal, closeModal } from "./components/modal";
 import { clearValidation, enableValidation } from "./components/validation";
 import {
@@ -30,6 +30,7 @@ const buttonsPopupClose = document.querySelectorAll(".popup__close");
 const formPopupProfile = document.forms["edit-profile"];
 const formPopupCardAdd = document.forms["new-place"];
 const formPopupAvatar = document.forms["edit-avatar"];
+const formPopupDeleteCard = document.forms["delete-card"];
 
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
@@ -67,11 +68,7 @@ function renderLoading(isLoading) {
   if (openedPopup) {
     const submitButton = openedPopup.querySelector(".popup__button");
 
-    if (isLoading) {
-      submitButton.textContent = "Сохранение...";
-    } else {
-      submitButton.textContent = "Сохранить";
-    }
+    submitButton.textContent = isLoading ? "Сохранение..." : "Сохранить";
   }
 }
 
@@ -168,6 +165,7 @@ buttonProfileAdd.addEventListener("click", () => {
 formPopupProfile.addEventListener("submit", handleEditProfileFormSubmit);
 formPopupCardAdd.addEventListener("submit", handleAddCardFormSubmit);
 formPopupAvatar.addEventListener("submit", handleEditAvatarFormSubmit);
+formPopupDeleteCard.addEventListener("submit", confirmDeleteCard);
 
 enableValidation(validationConfig);
 

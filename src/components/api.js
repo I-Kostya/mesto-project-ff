@@ -61,9 +61,5 @@ function deleteLike(cardId) {
 }
 
 export function toggleLikeState(cardId, isLiked) {
-  if (isLiked) {
-    return deleteLike(cardId);
-  } else {
-    return likeCard(cardId);
-  }
+  return isLiked ? deleteLike(cardId) : likeCard(cardId);
 }

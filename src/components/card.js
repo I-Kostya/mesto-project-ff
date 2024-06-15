@@ -2,7 +2,9 @@ import { deleteCardRequest, toggleLikeState } from "./api";
 import { closeModal, openModal } from "./modal";
 
 const popupDeleteCard = document.querySelector(".popup_type_delete-card");
-const formPopupDeleteCard = document.forms["delete-card"];
+
+let cardToDelete = null;
+let cardToDeleteId = null;
 
 export function createCard(cardData, cardTemplate, handlers, userId) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -16,21 +18,17 @@ export function createCard(cardData, cardTemplate, handlers, userId) {
 
   if (userId === cardData.owner._id) {
     deleteButton.addEventListener("click", () => {
-      openModal(popupDeleteCard);
-      formPopupDeleteCard.addEventListener("submit", () => {
-        deleteCard(cardElement, cardData);
-      });
+      handlers.deleteCard(cardElement, cardData._id);
     });
   } else {
     deleteButton.remove();
   }
 
   likeCounter.textContent = cardData.likes.length;
-  cardData.likes.forEach((like) => {
-    if (like._id === userId) {
-      likeButton.classList.add("card__like-button_is-active");
-    }
-  });
+
+  if (cardData.likes.some((like) => like._id === userId)) {
+    likeButton.classList.add("card__like-button_is-active");
+  }
 
   likeButton.addEventListener("click", (evt) =>
     handlers.likeCard(evt, cardData._id, likeCounter)
@@ -40,15 +38,23 @@ export function createCard(cardData, cardTemplate, handlers, userId) {
   return cardElement;
 }
 
-export function deleteCard(cardElement, card) {
-  deleteCardRequest(card._id)
-    .then(() => {
-      cardElement.remove();
-      closeModal(popupDeleteCard);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+export function deleteCard(card, cardId) {
+  cardToDelete = card;
+  cardToDeleteId = cardId;
+  openModal(popupDeleteCard);
+}
+
+export function confirmDeleteCard() {
+  if (cardToDelete && cardToDeleteId) {
+    deleteCardRequest(cardToDeleteId)
+      .then(() => {
+        cardToDelete.remove();
+        closeModal(popupDeleteCard);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 export function likeCard(evt, cardId, likeCounter) {

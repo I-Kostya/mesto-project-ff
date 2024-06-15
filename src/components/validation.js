@@ -82,7 +82,7 @@ export function clearValidation(formElement, config) {
     hideInputError(formElement, inputElement, config);
   });
 
-  toggleButtonState(inputList, buttonElement, config);
+  disableButton(buttonElement, config);
 }
 
 export function enableValidation(config) {
