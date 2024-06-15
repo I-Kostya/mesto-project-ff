@@ -8,7 +8,7 @@ export function openModal(popup) {
 export function closeModal(popup) {
   popup.classList.remove("popup_is-opened");
 
-  document.removeEventListener("keydown", closeModalByEsc)
+  document.removeEventListener("keydown", closeModalByEsc);
 }
 
 function closeModalByEsc(evt) {

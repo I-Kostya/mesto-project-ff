@@ -60,7 +60,7 @@ function setEventListeners(formElement, config) {
 
   toggleButtonState(inputList, buttonElement, config);
 
-  formElement.addEventListener("submit", () => {
+  formElement.addEventListener("reset", () => {
     disableButton(buttonElement, config);
   });
 
@@ -87,10 +87,10 @@ export function clearValidation(formElement, config) {
 
 export function enableValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
-  
+
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
-      evt.preventDefault();  
+      evt.preventDefault();
     });
     setEventListeners(formElement, config);
   });

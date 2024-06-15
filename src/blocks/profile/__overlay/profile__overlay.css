@@ -1,0 +1,14 @@
+.profile__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.profile__overlay:hover {
+  background-image: url('../../../images/pencil.svg');
+  background-color: #000;
+  opacity: 0.8;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 26px;
+  cursor: pointer;
+}
