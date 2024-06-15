@@ -1,4 +1,4 @@
-import { deleteCardRequest, toggleLikeState, updateCardOwner } from "./api";
+import { deleteCardRequest, toggleLikeState } from "./api";
 import { closeModal, openModal } from "./modal";
 
 const popupDeleteCard = document.querySelector(".popup_type_delete-card");
@@ -19,7 +19,6 @@ export function createCard(cardData, cardTemplate, handlers, userId) {
       openModal(popupDeleteCard);
       formPopupDeleteCard.addEventListener("submit", () => {
         deleteCard(cardElement, cardData);
-        closeModal(popupDeleteCard);
       });
     });
   } else {
@@ -45,6 +44,7 @@ export function deleteCard(cardElement, card) {
   deleteCardRequest(card._id)
     .then(() => {
       cardElement.remove();
+      closeModal(popupDeleteCard);
     })
     .catch((err) => {
       console.log(err);
