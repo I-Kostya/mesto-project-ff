@@ -33,7 +33,9 @@ export function createCard(cardData, cardTemplate, handlers, userId) {
   likeButton.addEventListener("click", (evt) =>
     handlers.likeCard(evt, cardData._id, likeCounter)
   );
-  cardImage.addEventListener("click", () => handlers.showPicture(cardData));
+  cardImage.addEventListener("click", () => {
+    handlers.showPicture(cardData);
+  });
 
   return cardElement;
 }
